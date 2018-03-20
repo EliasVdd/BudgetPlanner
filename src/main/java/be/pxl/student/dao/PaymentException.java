@@ -1,4 +1,4 @@
 package be.pxl.student.dao;
 
-public class PaymentException {
+public class PaymentException extends Exception {
 }

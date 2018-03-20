@@ -1,5 +1,6 @@
 package be.pxl.student;
 
+import be.pxl.student.dao.ConnectionFactory;
 import org.junit.*;
 
 
@@ -11,9 +12,7 @@ public class BudgetPlannerTest {
 	public void setUp() throws Exception {
 
 		budgetPlanner = new BudgetPlanner();
-		// ... setup database connection
-		// ... create transaction
-		// ... feed some test data
+		budgetPlanner.startTransaction();
 
 	}
 
@@ -43,6 +42,8 @@ public class BudgetPlannerTest {
 	@After
 	public void tearDown() throws Exception {
 
+		budgetPlanner.getTransaction().rollback();
+		ConnectionFactory.closeConnection();
 		// ... rollback transaction
 		// ... close connection
 
