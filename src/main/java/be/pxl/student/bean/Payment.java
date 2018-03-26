@@ -1,19 +1,32 @@
 package be.pxl.student.bean;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 public class Payment {
 
-	int id;
-	Date date;
-	float amount;
-	String currency = "EUR";
-	String detail;
-	int accountId;
-	int counterAccountId;
-	int labelId;
+	private int id;
+	private LocalDate date;
+	private float amount;
+	private String currency = "EUR";
+	private String detail;
+	private int accountId;
+	private int counterAccountId;
+	private int labelId;
 
-	public Payment(Date date, float amount, String currency, String detail, int accountId, int counterAccountId, int labelId) {
+	public Payment(int id, LocalDate date, float amount, String currency, String detail, int accountId, int counterAccountId, int labelId) {
+		this.id = id;
+		this.date = date;
+		this.amount = amount;
+		this.currency = currency;
+		this.detail = detail;
+		this.accountId = accountId;
+		this.counterAccountId = counterAccountId;
+		this.labelId = labelId;
+	}
+
+	public Payment(LocalDate date, float amount, String currency, String detail, int accountId, int counterAccountId, int labelId) {
 		this.date = date;
 		this.amount = amount;
 		this.currency = currency;
@@ -27,11 +40,15 @@ public class Payment {
 		return id;
 	}
 
-	public Date getDate() {
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
@@ -81,5 +98,40 @@ public class Payment {
 
 	public void setLabelId(int labelId) {
 		this.labelId = labelId;
+	}
+
+	@Override
+	public String toString() {
+		return "Payment{" +
+				"id=" + id +
+				", date=" + date +
+				", amount=" + amount +
+				", currency='" + currency + '\'' +
+				", detail='" + detail + '\'' +
+				", accountId=" + accountId +
+				", counterAccountId=" + counterAccountId +
+				", labelId=" + labelId +
+				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Payment payment = (Payment) o;
+		return getId() == payment.getId() &&
+				Float.compare(payment.getAmount(), getAmount()) == 0 &&
+				getAccountId() == payment.getAccountId() &&
+				getCounterAccountId() == payment.getCounterAccountId() &&
+				getLabelId() == payment.getLabelId() &&
+				Objects.equals(getDate(), payment.getDate()) &&
+				Objects.equals(getCurrency(), payment.getCurrency()) &&
+				Objects.equals(getDetail(), payment.getDetail());
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(getId(), getDate(), getAmount(), getCurrency(), getDetail(), getAccountId(), getCounterAccountId(), getLabelId());
 	}
 }

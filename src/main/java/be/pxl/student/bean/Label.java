@@ -2,9 +2,9 @@ package be.pxl.student.bean;
 
 public class Label {
 
-	int id;
-	String name;
-	String description;
+	private int id;
+	private String name;
+	private String description;
 
 	public Label(String name, String description) {
 		this.name = name;

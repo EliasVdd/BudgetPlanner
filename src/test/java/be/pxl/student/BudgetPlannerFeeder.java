@@ -8,4 +8,10 @@ public class BudgetPlannerFeeder {
 		// ...
 
 	}
+
+	public void insertTestData() {
+
+
+
+	}
 }
