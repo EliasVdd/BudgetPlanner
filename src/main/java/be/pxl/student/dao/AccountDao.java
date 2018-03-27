@@ -7,23 +7,23 @@ import java.util.List;
 
 public class AccountDao {
 
-	public static Account insertAccount (Connection connection, Account Account) throws AccountException {
+	public static Account insertAccount (Connection connection, Account account) throws AccountException {
 
 		String query = "INSERT INTO Account (`number`,`IBAN`,`name`) VALUES (?,?,?)";
 
 		try (PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-			stmt.setString(1, Account.getNumber());
-			stmt.setString(2, Account.getIBAN());
-			stmt.setString(3, Account.getName());
+			stmt.setString(1, account.getNumber());
+			stmt.setString(2, account.getIBAN());
+			stmt.setString(3, account.getName());
 
 			stmt.executeUpdate();
 			try (ResultSet resultSet = stmt.getGeneratedKeys()) {
 				if (resultSet.next()) {
-					Account.setId (resultSet.getInt(1));
+					account.setId (resultSet.getInt(1));
 				}
 			}
 
-			return Account;
+			return account;
 
 		} catch (SQLException e) {
 			throw new AccountException(e);
